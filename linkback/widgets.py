@@ -32,6 +32,8 @@ class SelectWithLinkWidget(forms.widgets.Select):
     def render(self, *args, **kwargs):
         result = super(SelectWithLinkWidget, self).render(*args, **kwargs)
         name, value = args
+        if not value:
+            return result
         return mark_safe(result +
                 u'<a target="_blank" href="../../../%s/%s/%s/">%s</a>' %\
                       (
@@ -40,5 +42,3 @@ class SelectWithLinkWidget(forms.widgets.Select):
                        value, LOOKUP_IMAGE(self)
                        )
         )
-
-        return result
