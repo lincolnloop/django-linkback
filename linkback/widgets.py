@@ -5,6 +5,25 @@ from django.utils.safestring import mark_safe
 LOOKUP_IMAGE = lambda x: '<img src="/static/admin/img/admin/selector-search.gif" style="cursor: pointer; margin-left: 5px" width="16" height="16" alt="Lookup">'
 
 
+class ModelLinkWidget(forms.Widget):
+    def __init__(self, obj, attrs=None):
+        self.object = obj
+        super(ModelLinkWidget, self).__init__(attrs)
+
+    def render(self, name, value, attrs=None):
+        if self.object.pk:
+            return mark_safe(
+                u'<a target="_blank" href="../../../%s/%s/%s/">%s</a>' %\
+                      (
+                       self.object._meta.app_label,
+                       self.object._meta.object_name.lower(),
+                       self.object.pk, LOOKUP_IMAGE(self)
+                       )
+            )
+        else:
+            return mark_safe(u'')
+
+
 class SelectWithLinkWidget(forms.widgets.Select):
     def __init__(self, klass, attrs=None, choices=(), *args, **kwargs):
         self.klass = klass
