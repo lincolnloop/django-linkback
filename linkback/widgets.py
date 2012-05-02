@@ -2,7 +2,7 @@ from django import forms
 from django.utils.safestring import mark_safe
 
 #An interest value of this would be x.object
-LOOKUP_IMAGE = lambda x: '<img src="/static/admin/img/admin/selector-search.gif" style="cursor: pointer; margin-left: 5px" width="16" height="16" alt="Lookup">'
+LOOKUP_IMAGE = lambda x: '<img src="/static/admin/img/selector-search.gif" style="cursor: pointer; margin-left: 5px" width="16" height="16" alt="Lookup">'
 
 
 class ModelLinkWidget(forms.Widget):
